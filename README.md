@@ -2,7 +2,17 @@
 <h1 align="center"><b>HareBoy</b></h1>
 <p align="center">A Game Boy (DMG) emulator written in <a href="https://harelang.org">Hare</a></p>
 
----
+
+<p align="center">
+  <img src="docs/gifs/demo-1.gif" width="160" alt="Demo 1">
+  <img src="docs/gifs/demo-2.gif" width="160" alt="Demo 2">
+  <img src="docs/gifs/demo-3.gif" width="160" alt="Demo 3">
+</p>
+<p align="center">
+  <img src="docs/gifs/demo-4.gif" width="160" alt="Demo 4">
+  <img src="docs/gifs/demo-5.gif" width="160" alt="Demo 5">
+  <img src="docs/gifs/demo-6.gif" width="160" alt="Demo 6">
+</p>
 
 ## Usage
 
