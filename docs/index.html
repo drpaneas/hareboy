@@ -1,0 +1,977 @@
+<!doctype html>
+<html lang='en'>
+<meta charset='utf-8' />
+<meta name='viewport' content='width=device-width, initial-scale=1' />
+<title>HareBoy - Game Boy Emulator</title>
+<link rel='icon' type='image/png' href='data:image/png;base64,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'>
+<style>
+body {
+	font-family: sans-serif;
+	line-height: 1.3;
+	margin: 0 auto;
+	padding: 0 1rem;
+}
+
+nav:not(#TableOfContents) {
+	max-width: calc(800px + 128px + 128px);
+	margin: 1rem auto 0;
+	display: grid;
+	grid-template-rows: auto auto 1fr;
+	grid-template-columns: auto 1fr;
+	grid-template-areas:
+		'logo header'
+		'logo nav'
+		'logo none';
+}
+
+nav:not(#TableOfContents) img {
+	grid-area: logo;
+}
+
+nav:not(#TableOfContents) h1 {
+	grid-area: header;
+	margin: 0;
+	padding: 0;
+}
+
+nav:not(#TableOfContents) ul {
+	grid-area: nav;
+	margin: 0.5rem 0 0 0;
+	padding: 0;
+	list-style: none;
+	display: flex;
+	flex-direction: row;
+	justify-content: left;
+	flex-wrap: wrap;
+}
+
+nav:not(#TableOfContents) li:not(:first-child) {
+	margin-left: 2rem;
+}
+
+#TableOfContents {
+	font-size: 1.1rem;
+}
+
+main {
+	padding: 0 128px;
+	max-width: 800px;
+	margin: 0 auto;
+
+}
+
+pre {
+	background-color: #eee;
+	padding: 0.25rem 1rem;
+	margin: 0 -1rem 1rem;
+	font-size: 1.2rem;
+	max-width: calc(100% + 1rem);
+	overflow-x: auto;
+}
+
+pre .keyword {
+	color: #008;
+}
+
+pre .type {
+	color: #44F;
+}
+
+ol {
+	padding-left: 0;
+	list-style: none;
+}
+
+ol li {
+	padding-left: 0;
+}
+
+h2, h3, h4 {
+	display: flex;
+}
+
+h3 {
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 0.25rem;
+}
+
+.invalid {
+	color: red;
+}
+
+.heading-body {
+	word-wrap: anywhere;
+}
+
+.heading-extra {
+	align-self: flex-end;
+	flex-grow: 1;
+	padding-left: 0.5rem;
+	text-align: right;
+	font-size: 0.8rem;
+	color: #444;
+}
+
+h4:target + pre {
+	background: #ddf;
+}
+
+details {
+	background: #eee;
+	margin: 1rem -1rem 1rem;
+}
+
+summary {
+	cursor: pointer;
+	padding: 0.5rem 1rem;
+}
+
+details pre {
+	margin: 0;
+}
+
+.comment {
+	color: #000;
+	font-weight: bold;
+}
+
+@media(max-width: 1000px) {
+	main {
+		padding: 0;
+	}
+}
+
+@media(prefers-color-scheme: dark) {
+	body {
+		background: #121415;
+		color: #e1dfdc;
+	}
+
+	img.mascot {
+		filter: invert(.92);
+	}
+
+	a {
+		color: #78bef8;
+	}
+
+	a:visited {
+		color: #48a7f5;
+	}
+
+	summary {
+		background: #16191c;
+	}
+
+	h3 {
+		border-bottom: solid #16191c;
+	}
+
+	h4:target + pre {
+		background: #162329;
+	}
+
+	pre {
+		background-color: #16191c;
+	}
+
+	pre .keyword {
+		color: #69f;
+	}
+
+	pre .type {
+		color: #3cf;
+	}
+
+	.comment {
+		color: #fff;
+	}
+
+	.heading-extra {
+		color: #9b9997;
+	}
+}
+</style>
+<nav>
+	<img src='data:image/png;base64,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'
+		class='mascot'
+		alt='An inked drawing of the Hare mascot, a fuzzy rabbit'
+		width='128' height='128' />
+	<h1>HareBoy</h1>
+	<ul>
+		<li>
+			<a href='https://github.com/drpaneas/hareboy'>Home</a>
+		</li>
+<li></li></ul>
+</nav>
+<main><h2>HareBoy API Reference</h2>
+<h3>Index</h3>
+<h4>Types</h4>
+<pre>
+<span class='keyword'>type</span> <a href='#apu'>apu</a> = <span class='type'>struct</span> {
+	ch1: <span class='type'>square_ch</span>,
+	ch2: <span class='type'>square_ch</span>,
+	ch3: <span class='type'>wave_ch</span>,
+	ch4: <span class='type'>noise_ch</span>,
+	nr50: <span class='type'>u8</span>,
+	nr51: <span class='type'>u8</span>,
+	nr52: <span class='type'>u8</span>,
+	frame_seq_timer: <span class='type'>i32</span>,
+	frame_seq_step: <span class='type'>i32</span>,
+	sample_timer: <span class='type'>i32</span>,
+	sample_period: <span class='type'>i32</span>,
+<span class='comment'>	</span><span class='comment'>//</span><span class='comment'> Audio output buffer.</span><span class='comment'>
+</span>	audio_buf: <span class='type'>[</span>2048<span class='type'>]</span><span class='type'>i16</span>,
+<span class='comment'>	</span><span class='comment'>//</span><span class='comment'> stereo pairs</span><span class='comment'>
+</span>	audio_len: <span class='type'>size</span>,
+	audio_dev: <span class='type'>u32</span>,
+};
+<span class='keyword'>type</span> <a href='#cartridge'>cartridge</a> = <span class='type'>struct</span> {
+	mbc: <span class='type'>mbc_type</span>,
+	rom: <span class='type'>[</span><span class='type'>]</span><span class='type'>u8</span>,
+	ram: <span class='type'>[</span><span class='type'>]</span><span class='type'>u8</span>,
+	rom_bank: <span class='type'>uint</span>,
+	ram_bank: <span class='type'>uint</span>,
+	ram_enabled: <span class='type'>bool</span>,
+<span class='comment'>	</span><span class='comment'>//</span><span class='comment'> MBC1 only: 0=ROM, 1=RAM</span><span class='comment'>
+</span>	banking_mode: <span class='type'>uint</span>,
+<span class='comment'>	</span><span class='comment'>//</span><span class='comment'> MBC1 only</span><span class='comment'>
+</span>	mbc1_low5: <span class='type'>uint</span>,
+<span class='comment'>	</span><span class='comment'>//</span><span class='comment'> MBC1 only</span><span class='comment'>
+</span>	mbc1_high2: <span class='type'>uint</span>,
+	rom_bank_mask: <span class='type'>uint</span>,
+	ram_bank_mask: <span class='type'>uint</span>,
+};
+<span class='keyword'>type</span> <a href='#cpu'>cpu</a> = <span class='type'>struct</span> {
+	a: <span class='type'>u8</span>,
+	f: <span class='type'>u8</span>,
+	b: <span class='type'>u8</span>,
+	c: <span class='type'>u8</span>,
+	d: <span class='type'>u8</span>,
+	e: <span class='type'>u8</span>,
+	h: <span class='type'>u8</span>,
+	l: <span class='type'>u8</span>,
+	pc: <span class='type'>u16</span>,
+	sp: <span class='type'>u16</span>,
+	halted: <span class='type'>bool</span>,
+	locked: <span class='type'>bool</span>,
+	ime: <span class='type'>bool</span>,
+	ime_scheduled: <span class='type'>bool</span>,
+	halt_bug: <span class='type'>bool</span>,
+};
+<span class='keyword'>type</span> <a href='#gameboy'>gameboy</a> = <span class='type'>struct</span> {
+	cpu: <span class='type'>cpu</span>,
+	mmu: <span class='type'>mmu</span>,
+	ppu: <span class='type'>ppu</span>,
+	tmr: <span class='type'>timer</span>,
+	joy: <span class='type'>joypad</span>,
+	cart: <span class='type'>cartridge</span>,
+	snd: <span class='type'>apu</span>,
+	total_cycles: <span class='type'>u64</span>,
+	frame_count: <span class='type'>u64</span>,
+	leftover_cycles: <span class='type'>i32</span>,
+};
+<span class='keyword'>type</span> <a href='#joy_key'>joy_key</a> = <span class='type'>enum</span> {
+	RIGHT,
+	LEFT,
+	UP,
+	DOWN,
+	A,
+	B,
+	START,
+	SELECT,
+};
+<span class='keyword'>type</span> <a href='#joypad'>joypad</a> = <span class='type'>struct</span> {
+	up: <span class='type'>bool</span>,
+	down: <span class='type'>bool</span>,
+	left: <span class='type'>bool</span>,
+	right: <span class='type'>bool</span>,
+	a: <span class='type'>bool</span>,
+	b: <span class='type'>bool</span>,
+	start: <span class='type'>bool</span>,
+	select: <span class='type'>bool</span>,
+	select_buttons: <span class='type'>bool</span>,
+	select_dpad: <span class='type'>bool</span>,
+};
+<span class='keyword'>type</span> <a href='#mbc_type'>mbc_type</a> = <span class='type'>enum</span> {
+	NONE,
+	MBC1,
+	MBC3,
+	MBC5,
+};
+<span class='keyword'>type</span> <a href='#mmu'>mmu</a> = <span class='type'>struct</span> {
+<span class='comment'>	</span><span class='comment'>//</span><span class='comment'> Peripheral pointers are nullable because the mmu is</span><span class='comment'>
+</span><span class='comment'>	</span><span class='comment'>//</span><span class='comment'> constructed inside [[gameboy]] before stable addresses</span><span class='comment'>
+</span><span class='comment'>	</span><span class='comment'>//</span><span class='comment'> exist for sibling fields.  [[init]] sets them once the</span><span class='comment'>
+</span><span class='comment'>	</span><span class='comment'>//</span><span class='comment'> parent struct is placed; after that they are always</span><span class='comment'>
+</span><span class='comment'>	</span><span class='comment'>//</span><span class='comment'> non-null.</span><span class='comment'>
+</span>	cart: <span class='type'>nullable</span> <span class='type'>*</span><span class='type'>cartridge</span>,
+	tmr: <span class='type'>nullable</span> <span class='type'>*</span><span class='type'>timer</span>,
+	joy: <span class='type'>nullable</span> <span class='type'>*</span><span class='type'>joypad</span>,
+	snd: <span class='type'>nullable</span> <span class='type'>*</span><span class='type'>apu</span>,
+<span class='comment'>	</span><span class='comment'>//</span><span class='comment'> Work RAM (0xC000-0xDFFF)</span><span class='comment'>
+</span>	wram: <span class='type'>[</span>8192<span class='type'>]</span><span class='type'>u8</span>,
+<span class='comment'>	</span><span class='comment'>//</span><span class='comment'> Video RAM (0x8000-0x9FFF)</span><span class='comment'>
+</span>	vram: <span class='type'>[</span>8192<span class='type'>]</span><span class='type'>u8</span>,
+<span class='comment'>	</span><span class='comment'>//</span><span class='comment'> OAM (0xFE00-0xFE9F)</span><span class='comment'>
+</span>	oam: <span class='type'>[</span>160<span class='type'>]</span><span class='type'>u8</span>,
+<span class='comment'>	</span><span class='comment'>//</span><span class='comment'> High RAM (0xFF80-0xFFFE)</span><span class='comment'>
+</span>	hram: <span class='type'>[</span>127<span class='type'>]</span><span class='type'>u8</span>,
+<span class='comment'>	</span><span class='comment'>//</span><span class='comment'> I/O registers (0xFF00-0xFF7F)</span><span class='comment'>
+</span>	io: <span class='type'>[</span>128<span class='type'>]</span><span class='type'>u8</span>,
+<span class='comment'>	</span><span class='comment'>//</span><span class='comment'> Interrupt Enable (0xFFFF)</span><span class='comment'>
+</span>	ie: <span class='type'>u8</span>,
+<span class='comment'>	</span><span class='comment'>//</span><span class='comment'> Serial output for test ROMs.</span><span class='comment'>
+</span>	serial_buffer: <span class='type'>[</span>256<span class='type'>]</span><span class='type'>u8</span>,
+	serial_len: <span class='type'>size</span>,
+<span class='comment'>	</span><span class='comment'>//</span><span class='comment'> OAM DMA state.</span><span class='comment'>
+</span>	dma_active: <span class='type'>bool</span>,
+	dma_source: <span class='type'>u16</span>,
+	dma_index: <span class='type'>uint</span>,
+	dma_delay: <span class='type'>i32</span>,
+	dma_cycles: <span class='type'>i32</span>,
+};
+<span class='keyword'>type</span> <a href='#noise_ch'>noise_ch</a> = <span class='type'>struct</span> {
+	enabled: <span class='type'>bool</span>,
+	dac_enabled: <span class='type'>bool</span>,
+	length_counter: <span class='type'>i32</span>,
+	length_enabled: <span class='type'>bool</span>,
+	volume: <span class='type'>i32</span>,
+	volume_init: <span class='type'>i32</span>,
+	volume_env_add: <span class='type'>bool</span>,
+	volume_env_per: <span class='type'>i32</span>,
+	volume_env_timer: <span class='type'>i32</span>,
+	clock_shift: <span class='type'>i32</span>,
+	width_mode: <span class='type'>bool</span>,
+	divisor_code: <span class='type'>i32</span>,
+	freq_timer: <span class='type'>i32</span>,
+	lfsr: <span class='type'>u16</span>,
+};
+<span class='keyword'>type</span> <a href='#ppu'>ppu</a> = <span class='type'>struct</span> {
+	framebuffer: <span class='type'>[</span>SCREEN_W * SCREEN_H<span class='type'>]</span><span class='type'>u8</span>,
+	bg_color_idx: <span class='type'>[</span>SCREEN_W * SCREEN_H<span class='type'>]</span><span class='type'>u8</span>,
+	scanline: <span class='type'>uint</span>,
+	scanline_cycles: <span class='type'>uint</span>,
+	window_line: <span class='type'>uint</span>,
+	window_was_on: <span class='type'>bool</span>,
+	lcd_enabled: <span class='type'>bool</span>,
+	stat_line_high: <span class='type'>bool</span>,
+};
+<span class='keyword'>type</span> <a href='#square_ch'>square_ch</a> = <span class='type'>struct</span> {
+	enabled: <span class='type'>bool</span>,
+	dac_enabled: <span class='type'>bool</span>,
+	duty: <span class='type'>i32</span>,
+	duty_pos: <span class='type'>i32</span>,
+	length_counter: <span class='type'>i32</span>,
+	length_enabled: <span class='type'>bool</span>,
+	volume: <span class='type'>i32</span>,
+	volume_init: <span class='type'>i32</span>,
+	volume_env_add: <span class='type'>bool</span>,
+	volume_env_per: <span class='type'>i32</span>,
+	volume_env_timer: <span class='type'>i32</span>,
+	frequency: <span class='type'>i32</span>,
+	freq_timer: <span class='type'>i32</span>,
+<span class='comment'>	</span><span class='comment'>//</span><span class='comment'> Sweep (CH1 only)</span><span class='comment'>
+</span>	sweep_enabled: <span class='type'>bool</span>,
+	sweep_period: <span class='type'>i32</span>,
+	sweep_negate: <span class='type'>bool</span>,
+	sweep_shift: <span class='type'>i32</span>,
+	sweep_timer: <span class='type'>i32</span>,
+	sweep_shadow: <span class='type'>i32</span>,
+	sweep_calc_done: <span class='type'>bool</span>,
+};
+<span class='keyword'>type</span> <a href='#timer'>timer</a> = <span class='type'>struct</span> {
+<span class='comment'>	</span><span class='comment'>//</span><span class='comment'> Timer counter (0xFF05)</span><span class='comment'>
+</span>	tima: <span class='type'>u8</span>,
+<span class='comment'>	</span><span class='comment'>//</span><span class='comment'> Timer modulo (0xFF06)</span><span class='comment'>
+</span>	tma: <span class='type'>u8</span>,
+<span class='comment'>	</span><span class='comment'>//</span><span class='comment'> Timer control (0xFF07)</span><span class='comment'>
+</span>	tac: <span class='type'>u8</span>,
+<span class='comment'>	</span><span class='comment'>//</span><span class='comment'> Internal divider; DIV reads upper 8 bits</span><span class='comment'>
+</span>	div: <span class='type'>u16</span>,
+	reload_delay: <span class='type'>i32</span>,
+	reload_cycle_b: <span class='type'>i32</span>,
+};
+<span class='keyword'>type</span> <a href='#wave_ch'>wave_ch</a> = <span class='type'>struct</span> {
+	enabled: <span class='type'>bool</span>,
+	dac_enabled: <span class='type'>bool</span>,
+	length_counter: <span class='type'>i32</span>,
+	length_enabled: <span class='type'>bool</span>,
+	volume_code: <span class='type'>i32</span>,
+	frequency: <span class='type'>i32</span>,
+	freq_timer: <span class='type'>i32</span>,
+	sample_pos: <span class='type'>i32</span>,
+	sample_buffer: <span class='type'>u8</span>,
+	wave_ram: <span class='type'>[</span>16<span class='type'>]</span><span class='type'>u8</span>,
+};
+</pre><h4>Errors</h4>
+<pre>
+<span class='keyword'>type</span> <a href='#audio_error'>audio_error</a> = <span class='type'>!</span><span class='type'>void</span>;
+</pre><h4>Constants</h4>
+<pre>
+<span class='keyword'>def</span> <a href='#SCREEN_H'>SCREEN_H</a>: <span class='type'>size</span> = 144;
+<span class='keyword'>def</span> <a href='#SCREEN_W'>SCREEN_W</a>: <span class='type'>size</span> = 160;
+</pre><h4>Globals</h4>
+<pre>
+<span class='keyword'>const</span> <a href='#PALETTE'>PALETTE</a>: <span class='type'>[</span>4<span class='type'>]</span><span class='type'>[</span>4<span class='type'>]</span><span class='type'>u8</span>;
+</pre><h4>Functions</h4>
+<pre>
+<span class='keyword'>fn</span> <a href='#apu_close'>apu_close</a>(a: <span class='type'>*</span><span class='type'>apu</span>) <span class='type'>void</span>;
+<span class='keyword'>fn</span> <a href='#apu_flush'>apu_flush</a>(a: <span class='type'>*</span><span class='type'>apu</span>) <span class='type'>void</span>;
+<span class='keyword'>fn</span> <a href='#apu_init_audio'>apu_init_audio</a>(a: <span class='type'>*</span><span class='type'>apu</span>) <span class='type'>(</span><span class='type'>void</span> <span class='type'>|</span> <span class='type'>audio_error</span><span class='type'>)</span>;
+<span class='keyword'>fn</span> <a href='#apu_read'>apu_read</a>(a: <span class='type'>*</span><span class='type'>apu</span>, addr: <span class='type'>u16</span>) <span class='type'>u8</span>;
+<span class='keyword'>fn</span> <a href='#apu_update'>apu_update</a>(a: <span class='type'>*</span><span class='type'>apu</span>, cycles: <span class='type'>i32</span>) <span class='type'>void</span>;
+<span class='keyword'>fn</span> <a href='#apu_write'>apu_write</a>(a: <span class='type'>*</span><span class='type'>apu</span>, addr: <span class='type'>u16</span>, value: <span class='type'>u8</span>) <span class='type'>void</span>;
+<span class='keyword'>fn</span> <a href='#audio_strerror'>audio_strerror</a>(err: <span class='type'>audio_error</span>) <span class='type'>str</span>;
+<span class='keyword'>fn</span> <a href='#cart_free'>cart_free</a>(c: <span class='type'>*</span><span class='type'>cartridge</span>) <span class='type'>void</span>;
+<span class='keyword'>fn</span> <a href='#cart_read_ram'>cart_read_ram</a>(c: <span class='type'>*</span><span class='type'>cartridge</span>, addr: <span class='type'>u16</span>) <span class='type'>u8</span>;
+<span class='keyword'>fn</span> <a href='#cart_read_rom'>cart_read_rom</a>(c: <span class='type'>*</span><span class='type'>cartridge</span>, addr: <span class='type'>u16</span>) <span class='type'>u8</span>;
+<span class='keyword'>fn</span> <a href='#cart_write_control'>cart_write_control</a>(c: <span class='type'>*</span><span class='type'>cartridge</span>, addr: <span class='type'>u16</span>, val: <span class='type'>u8</span>) <span class='type'>void</span>;
+<span class='keyword'>fn</span> <a href='#cart_write_ram'>cart_write_ram</a>(c: <span class='type'>*</span><span class='type'>cartridge</span>, addr: <span class='type'>u16</span>, val: <span class='type'>u8</span>) <span class='type'>void</span>;
+<span class='keyword'>fn</span> <a href='#cpu_step'>cpu_step</a>(c: <span class='type'>*</span><span class='type'>cpu</span>, m: <span class='type'>*</span><span class='type'>mmu</span>) <span class='type'>i32</span>;
+<span class='keyword'>fn</span> <a href='#finish'>finish</a>(gb: <span class='type'>*</span><span class='type'>gameboy</span>) <span class='type'>void</span>;
+<span class='keyword'>fn</span> <a href='#init'>init</a>(gb: <span class='type'>*</span><span class='type'>gameboy</span>) <span class='type'>void</span>;
+<span class='keyword'>fn</span> <a href='#joypad_read'>joypad_read</a>(j: <span class='type'>*</span><span class='type'>joypad</span>) <span class='type'>u8</span>;
+<span class='keyword'>fn</span> <a href='#joypad_set_key'>joypad_set_key</a>(j: <span class='type'>*</span><span class='type'>joypad</span>, key: <span class='type'>joy_key</span>, pressed: <span class='type'>bool</span>) <span class='type'>bool</span>;
+<span class='keyword'>fn</span> <a href='#joypad_write'>joypad_write</a>(j: <span class='type'>*</span><span class='type'>joypad</span>, value: <span class='type'>u8</span>) <span class='type'>bool</span>;
+<span class='keyword'>fn</span> <a href='#mmu_read'>mmu_read</a>(m: <span class='type'>*</span><span class='type'>mmu</span>, addr: <span class='type'>u16</span>) <span class='type'>u8</span>;
+<span class='keyword'>fn</span> <a href='#mmu_tick_dma'>mmu_tick_dma</a>(m: <span class='type'>*</span><span class='type'>mmu</span>, cycles: <span class='type'>i32</span>) <span class='type'>void</span>;
+<span class='keyword'>fn</span> <a href='#mmu_write'>mmu_write</a>(m: <span class='type'>*</span><span class='type'>mmu</span>, addr: <span class='type'>u16</span>, value: <span class='type'>u8</span>) <span class='type'>void</span>;
+<span class='keyword'>fn</span> <a href='#newapu'>newapu</a>() <span class='type'>apu</span>;
+<span class='keyword'>fn</span> <a href='#newcart'>newcart</a>(rom: <span class='type'>[</span><span class='type'>]</span><span class='type'>u8</span>) <span class='type'>cartridge</span>;
+<span class='keyword'>fn</span> <a href='#newgameboy'>newgameboy</a>(rom: <span class='type'>[</span><span class='type'>]</span><span class='type'>u8</span>) <span class='type'>gameboy</span>;
+<span class='keyword'>fn</span> <a href='#newtimer'>newtimer</a>() <span class='type'>timer</span>;
+<span class='keyword'>fn</span> <a href='#ppu_update'>ppu_update</a>(g: <span class='type'>*</span><span class='type'>ppu</span>, m: <span class='type'>*</span><span class='type'>mmu</span>) <span class='type'>void</span>;
+<span class='keyword'>fn</span> <a href='#run_frame'>run_frame</a>(gb: <span class='type'>*</span><span class='type'>gameboy</span>) <span class='type'>void</span>;
+<span class='keyword'>fn</span> <a href='#timer_read'>timer_read</a>(t: <span class='type'>*</span><span class='type'>timer</span>, addr: <span class='type'>u16</span>) <span class='type'>u8</span>;
+<span class='keyword'>fn</span> <a href='#timer_update'>timer_update</a>(t: <span class='type'>*</span><span class='type'>timer</span>, cycles: <span class='type'>i32</span>) <span class='type'>bool</span>;
+<span class='keyword'>fn</span> <a href='#timer_write'>timer_write</a>(t: <span class='type'>*</span><span class='type'>timer</span>, addr: <span class='type'>u16</span>, value: <span class='type'>u8</span>) <span class='type'>void</span>;
+
+<span class='comment'>// Undocumented functions:</span>
+<span class='keyword'>fn</span> <a href='#main'>main</a>() <span class='type'>void</span>;
+</pre><h3>Types</h3>
+<section class='member'>
+<h4 id='apu'><span class='heading-body'>type apu</span><span class='heading-extra'><a href='#apu'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>type</span> apu = <span class='type'>struct</span> {
+	ch1: <span class='type'>square_ch</span>,
+	ch2: <span class='type'>square_ch</span>,
+	ch3: <span class='type'>wave_ch</span>,
+	ch4: <span class='type'>noise_ch</span>,
+	nr50: <span class='type'>u8</span>,
+	nr51: <span class='type'>u8</span>,
+	nr52: <span class='type'>u8</span>,
+	frame_seq_timer: <span class='type'>i32</span>,
+	frame_seq_step: <span class='type'>i32</span>,
+	sample_timer: <span class='type'>i32</span>,
+	sample_period: <span class='type'>i32</span>,
+<span class='comment'>	</span><span class='comment'>//</span><span class='comment'> Audio output buffer.</span><span class='comment'>
+</span>	audio_buf: <span class='type'>[</span>2048<span class='type'>]</span><span class='type'>i16</span>,
+<span class='comment'>	</span><span class='comment'>//</span><span class='comment'> stereo pairs</span><span class='comment'>
+</span>	audio_len: <span class='type'>size</span>,
+	audio_dev: <span class='type'>u32</span>,
+};</pre>
+<p>Audio processing unit with four sound channels and an output sample buffer.
+</section>
+<section class='member'>
+<h4 id='cartridge'><span class='heading-body'>type cartridge</span><span class='heading-extra'><a href='#cartridge'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>type</span> cartridge = <span class='type'>struct</span> {
+	mbc: <span class='type'>mbc_type</span>,
+	rom: <span class='type'>[</span><span class='type'>]</span><span class='type'>u8</span>,
+	ram: <span class='type'>[</span><span class='type'>]</span><span class='type'>u8</span>,
+	rom_bank: <span class='type'>uint</span>,
+	ram_bank: <span class='type'>uint</span>,
+	ram_enabled: <span class='type'>bool</span>,
+<span class='comment'>	</span><span class='comment'>//</span><span class='comment'> MBC1 only: 0=ROM, 1=RAM</span><span class='comment'>
+</span>	banking_mode: <span class='type'>uint</span>,
+<span class='comment'>	</span><span class='comment'>//</span><span class='comment'> MBC1 only</span><span class='comment'>
+</span>	mbc1_low5: <span class='type'>uint</span>,
+<span class='comment'>	</span><span class='comment'>//</span><span class='comment'> MBC1 only</span><span class='comment'>
+</span>	mbc1_high2: <span class='type'>uint</span>,
+	rom_bank_mask: <span class='type'>uint</span>,
+	ram_bank_mask: <span class='type'>uint</span>,
+};</pre>
+<p>ROM cartridge with optional MBC and external RAM.
+</section>
+<section class='member'>
+<h4 id='cpu'><span class='heading-body'>type cpu</span><span class='heading-extra'><a href='#cpu'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>type</span> cpu = <span class='type'>struct</span> {
+	a: <span class='type'>u8</span>,
+	f: <span class='type'>u8</span>,
+	b: <span class='type'>u8</span>,
+	c: <span class='type'>u8</span>,
+	d: <span class='type'>u8</span>,
+	e: <span class='type'>u8</span>,
+	h: <span class='type'>u8</span>,
+	l: <span class='type'>u8</span>,
+	pc: <span class='type'>u16</span>,
+	sp: <span class='type'>u16</span>,
+	halted: <span class='type'>bool</span>,
+	locked: <span class='type'>bool</span>,
+	ime: <span class='type'>bool</span>,
+	ime_scheduled: <span class='type'>bool</span>,
+	halt_bug: <span class='type'>bool</span>,
+};</pre>
+<p>CPU register file and execution state.
+</section>
+<section class='member'>
+<h4 id='gameboy'><span class='heading-body'>type gameboy</span><span class='heading-extra'><a href='#gameboy'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>type</span> gameboy = <span class='type'>struct</span> {
+	cpu: <span class='type'>cpu</span>,
+	mmu: <span class='type'>mmu</span>,
+	ppu: <span class='type'>ppu</span>,
+	tmr: <span class='type'>timer</span>,
+	joy: <span class='type'>joypad</span>,
+	cart: <span class='type'>cartridge</span>,
+	snd: <span class='type'>apu</span>,
+	total_cycles: <span class='type'>u64</span>,
+	frame_count: <span class='type'>u64</span>,
+	leftover_cycles: <span class='type'>i32</span>,
+};</pre>
+<p>Top-level emulator state holding all subsystems.
+</section>
+<section class='member'>
+<h4 id='joy_key'><span class='heading-body'>type joy_key</span><span class='heading-extra'><a href='#joy_key'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>type</span> joy_key = <span class='type'>enum</span> {
+	RIGHT,
+	LEFT,
+	UP,
+	DOWN,
+	A,
+	B,
+	START,
+	SELECT,
+};</pre>
+<p>Joypad key identifiers for <a href='#joypad_set_key' class='ref'>joypad_set_key</a>.
+</section>
+<section class='member'>
+<h4 id='joypad'><span class='heading-body'>type joypad</span><span class='heading-extra'><a href='#joypad'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>type</span> joypad = <span class='type'>struct</span> {
+	up: <span class='type'>bool</span>,
+	down: <span class='type'>bool</span>,
+	left: <span class='type'>bool</span>,
+	right: <span class='type'>bool</span>,
+	a: <span class='type'>bool</span>,
+	b: <span class='type'>bool</span>,
+	start: <span class='type'>bool</span>,
+	select: <span class='type'>bool</span>,
+	select_buttons: <span class='type'>bool</span>,
+	select_dpad: <span class='type'>bool</span>,
+};</pre>
+<p>Joypad button and selection state.
+</section>
+<section class='member'>
+<h4 id='mbc_type'><span class='heading-body'>type mbc_type</span><span class='heading-extra'><a href='#mbc_type'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>type</span> mbc_type = <span class='type'>enum</span> {
+	NONE,
+	MBC1,
+	MBC3,
+	MBC5,
+};</pre>
+<p>Memory bank controller type.
+</section>
+<section class='member'>
+<h4 id='mmu'><span class='heading-body'>type mmu</span><span class='heading-extra'><a href='#mmu'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>type</span> mmu = <span class='type'>struct</span> {
+<span class='comment'>	</span><span class='comment'>//</span><span class='comment'> Peripheral pointers are nullable because the mmu is</span><span class='comment'>
+</span><span class='comment'>	</span><span class='comment'>//</span><span class='comment'> constructed inside [[gameboy]] before stable addresses</span><span class='comment'>
+</span><span class='comment'>	</span><span class='comment'>//</span><span class='comment'> exist for sibling fields.  [[init]] sets them once the</span><span class='comment'>
+</span><span class='comment'>	</span><span class='comment'>//</span><span class='comment'> parent struct is placed; after that they are always</span><span class='comment'>
+</span><span class='comment'>	</span><span class='comment'>//</span><span class='comment'> non-null.</span><span class='comment'>
+</span>	cart: <span class='type'>nullable</span> <span class='type'>*</span><span class='type'>cartridge</span>,
+	tmr: <span class='type'>nullable</span> <span class='type'>*</span><span class='type'>timer</span>,
+	joy: <span class='type'>nullable</span> <span class='type'>*</span><span class='type'>joypad</span>,
+	snd: <span class='type'>nullable</span> <span class='type'>*</span><span class='type'>apu</span>,
+<span class='comment'>	</span><span class='comment'>//</span><span class='comment'> Work RAM (0xC000-0xDFFF)</span><span class='comment'>
+</span>	wram: <span class='type'>[</span>8192<span class='type'>]</span><span class='type'>u8</span>,
+<span class='comment'>	</span><span class='comment'>//</span><span class='comment'> Video RAM (0x8000-0x9FFF)</span><span class='comment'>
+</span>	vram: <span class='type'>[</span>8192<span class='type'>]</span><span class='type'>u8</span>,
+<span class='comment'>	</span><span class='comment'>//</span><span class='comment'> OAM (0xFE00-0xFE9F)</span><span class='comment'>
+</span>	oam: <span class='type'>[</span>160<span class='type'>]</span><span class='type'>u8</span>,
+<span class='comment'>	</span><span class='comment'>//</span><span class='comment'> High RAM (0xFF80-0xFFFE)</span><span class='comment'>
+</span>	hram: <span class='type'>[</span>127<span class='type'>]</span><span class='type'>u8</span>,
+<span class='comment'>	</span><span class='comment'>//</span><span class='comment'> I/O registers (0xFF00-0xFF7F)</span><span class='comment'>
+</span>	io: <span class='type'>[</span>128<span class='type'>]</span><span class='type'>u8</span>,
+<span class='comment'>	</span><span class='comment'>//</span><span class='comment'> Interrupt Enable (0xFFFF)</span><span class='comment'>
+</span>	ie: <span class='type'>u8</span>,
+<span class='comment'>	</span><span class='comment'>//</span><span class='comment'> Serial output for test ROMs.</span><span class='comment'>
+</span>	serial_buffer: <span class='type'>[</span>256<span class='type'>]</span><span class='type'>u8</span>,
+	serial_len: <span class='type'>size</span>,
+<span class='comment'>	</span><span class='comment'>//</span><span class='comment'> OAM DMA state.</span><span class='comment'>
+</span>	dma_active: <span class='type'>bool</span>,
+	dma_source: <span class='type'>u16</span>,
+	dma_index: <span class='type'>uint</span>,
+	dma_delay: <span class='type'>i32</span>,
+	dma_cycles: <span class='type'>i32</span>,
+};</pre>
+<p>Memory management unit. Routes bus reads and writes to the <a href='#cartridge' class='ref'>cartridge</a>, <a href='#timer' class='ref'>timer</a>, <a href='#joypad' class='ref'>joypad</a>, and <a href='#apu' class='ref'>apu</a> via internal pointers set up by <a href='#init' class='ref'>init</a>.
+</section>
+<section class='member'>
+<h4 id='noise_ch'><span class='heading-body'>type noise_ch</span><span class='heading-extra'><a href='#noise_ch'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>type</span> noise_ch = <span class='type'>struct</span> {
+	enabled: <span class='type'>bool</span>,
+	dac_enabled: <span class='type'>bool</span>,
+	length_counter: <span class='type'>i32</span>,
+	length_enabled: <span class='type'>bool</span>,
+	volume: <span class='type'>i32</span>,
+	volume_init: <span class='type'>i32</span>,
+	volume_env_add: <span class='type'>bool</span>,
+	volume_env_per: <span class='type'>i32</span>,
+	volume_env_timer: <span class='type'>i32</span>,
+	clock_shift: <span class='type'>i32</span>,
+	width_mode: <span class='type'>bool</span>,
+	divisor_code: <span class='type'>i32</span>,
+	freq_timer: <span class='type'>i32</span>,
+	lfsr: <span class='type'>u16</span>,
+};</pre>
+<p>Noise channel state (CH4).
+</section>
+<section class='member'>
+<h4 id='ppu'><span class='heading-body'>type ppu</span><span class='heading-extra'><a href='#ppu'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>type</span> ppu = <span class='type'>struct</span> {
+	framebuffer: <span class='type'>[</span>SCREEN_W * SCREEN_H<span class='type'>]</span><span class='type'>u8</span>,
+	bg_color_idx: <span class='type'>[</span>SCREEN_W * SCREEN_H<span class='type'>]</span><span class='type'>u8</span>,
+	scanline: <span class='type'>uint</span>,
+	scanline_cycles: <span class='type'>uint</span>,
+	window_line: <span class='type'>uint</span>,
+	window_was_on: <span class='type'>bool</span>,
+	lcd_enabled: <span class='type'>bool</span>,
+	stat_line_high: <span class='type'>bool</span>,
+};</pre>
+<p>PPU state including framebuffer, scanline counters, and window tracking.
+</section>
+<section class='member'>
+<h4 id='square_ch'><span class='heading-body'>type square_ch</span><span class='heading-extra'><a href='#square_ch'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>type</span> square_ch = <span class='type'>struct</span> {
+	enabled: <span class='type'>bool</span>,
+	dac_enabled: <span class='type'>bool</span>,
+	duty: <span class='type'>i32</span>,
+	duty_pos: <span class='type'>i32</span>,
+	length_counter: <span class='type'>i32</span>,
+	length_enabled: <span class='type'>bool</span>,
+	volume: <span class='type'>i32</span>,
+	volume_init: <span class='type'>i32</span>,
+	volume_env_add: <span class='type'>bool</span>,
+	volume_env_per: <span class='type'>i32</span>,
+	volume_env_timer: <span class='type'>i32</span>,
+	frequency: <span class='type'>i32</span>,
+	freq_timer: <span class='type'>i32</span>,
+<span class='comment'>	</span><span class='comment'>//</span><span class='comment'> Sweep (CH1 only)</span><span class='comment'>
+</span>	sweep_enabled: <span class='type'>bool</span>,
+	sweep_period: <span class='type'>i32</span>,
+	sweep_negate: <span class='type'>bool</span>,
+	sweep_shift: <span class='type'>i32</span>,
+	sweep_timer: <span class='type'>i32</span>,
+	sweep_shadow: <span class='type'>i32</span>,
+	sweep_calc_done: <span class='type'>bool</span>,
+};</pre>
+<p>Square wave channel state (used by CH1 and CH2).
+</section>
+<section class='member'>
+<h4 id='timer'><span class='heading-body'>type timer</span><span class='heading-extra'><a href='#timer'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>type</span> timer = <span class='type'>struct</span> {
+<span class='comment'>	</span><span class='comment'>//</span><span class='comment'> Timer counter (0xFF05)</span><span class='comment'>
+</span>	tima: <span class='type'>u8</span>,
+<span class='comment'>	</span><span class='comment'>//</span><span class='comment'> Timer modulo (0xFF06)</span><span class='comment'>
+</span>	tma: <span class='type'>u8</span>,
+<span class='comment'>	</span><span class='comment'>//</span><span class='comment'> Timer control (0xFF07)</span><span class='comment'>
+</span>	tac: <span class='type'>u8</span>,
+<span class='comment'>	</span><span class='comment'>//</span><span class='comment'> Internal divider; DIV reads upper 8 bits</span><span class='comment'>
+</span>	div: <span class='type'>u16</span>,
+	reload_delay: <span class='type'>i32</span>,
+	reload_cycle_b: <span class='type'>i32</span>,
+};</pre>
+<p>Timer subsystem state.
+</section>
+<section class='member'>
+<h4 id='wave_ch'><span class='heading-body'>type wave_ch</span><span class='heading-extra'><a href='#wave_ch'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>type</span> wave_ch = <span class='type'>struct</span> {
+	enabled: <span class='type'>bool</span>,
+	dac_enabled: <span class='type'>bool</span>,
+	length_counter: <span class='type'>i32</span>,
+	length_enabled: <span class='type'>bool</span>,
+	volume_code: <span class='type'>i32</span>,
+	frequency: <span class='type'>i32</span>,
+	freq_timer: <span class='type'>i32</span>,
+	sample_pos: <span class='type'>i32</span>,
+	sample_buffer: <span class='type'>u8</span>,
+	wave_ram: <span class='type'>[</span>16<span class='type'>]</span><span class='type'>u8</span>,
+};</pre>
+<p>Wave channel state (CH3).
+</section>
+<h3>Errors</h3>
+<section class='member'>
+<h4 id='audio_error'><span class='heading-body'>type audio_error</span><span class='heading-extra'><a href='#audio_error'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>type</span> audio_error = <span class='type'>!</span><span class='type'>void</span>;</pre>
+<p>Returned when <a href='#apu_init_audio' class='ref'>apu_init_audio</a> cannot open the SDL audio device.
+</section>
+<h3>Constants</h3>
+<section class='member'>
+<h4 id='SCREEN_H'><span class='heading-body'>def SCREEN_H</span><span class='heading-extra'><a href='#SCREEN_H'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>def</span> SCREEN_H: <span class='type'>size</span> = 144;</pre>
+<p>Screen height in pixels.
+</section>
+<section class='member'>
+<h4 id='SCREEN_W'><span class='heading-body'>def SCREEN_W</span><span class='heading-extra'><a href='#SCREEN_W'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>def</span> SCREEN_W: <span class='type'>size</span> = 160;</pre>
+<p>Screen width in pixels.
+</section>
+<h3>Globals</h3>
+<section class='member'>
+<h4 id='PALETTE'><span class='heading-body'>let PALETTE</span><span class='heading-extra'><a href='#PALETTE'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>const</span> PALETTE: <span class='type'>[</span>4<span class='type'>]</span><span class='type'>[</span>4<span class='type'>]</span><span class='type'>u8</span>;</pre>
+<p>DMG shade palette: index 0-3 -&gt; RGBA (greenish Game Boy colors).
+</section>
+<h3>Functions</h3>
+<section class='member'>
+<h4 id='apu_close'><span class='heading-body'>fn apu_close</span><span class='heading-extra'><a href='#apu_close'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>fn</span> apu_close(a: <span class='type'>*</span><span class='type'>apu</span>) <span class='type'>void</span>;</pre>
+<p>Closes the audio device.
+</section>
+<section class='member'>
+<h4 id='apu_flush'><span class='heading-body'>fn apu_flush</span><span class='heading-extra'><a href='#apu_flush'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>fn</span> apu_flush(a: <span class='type'>*</span><span class='type'>apu</span>) <span class='type'>void</span>;</pre>
+<p>Flushes buffered audio samples to SDL via <a href='#apu_init_audio' class='ref'>apu_init_audio</a>&apos;s device.
+</section>
+<section class='member'>
+<h4 id='apu_init_audio'><span class='heading-body'>fn apu_init_audio</span><span class='heading-extra'><a href='#apu_init_audio'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>fn</span> apu_init_audio(a: <span class='type'>*</span><span class='type'>apu</span>) <span class='type'>(</span><span class='type'>void</span> <span class='type'>|</span> <span class='type'>audio_error</span><span class='type'>)</span>;</pre>
+<p>Opens the SDL audio device for playback.
+</section>
+<section class='member'>
+<h4 id='apu_read'><span class='heading-body'>fn apu_read</span><span class='heading-extra'><a href='#apu_read'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>fn</span> apu_read(a: <span class='type'>*</span><span class='type'>apu</span>, addr: <span class='type'>u16</span>) <span class='type'>u8</span>;</pre>
+<p>Reads an <a href='#apu' class='ref'>apu</a> register (0xFF10-0xFF3F).
+</section>
+<section class='member'>
+<h4 id='apu_update'><span class='heading-body'>fn apu_update</span><span class='heading-extra'><a href='#apu_update'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>fn</span> apu_update(a: <span class='type'>*</span><span class='type'>apu</span>, cycles: <span class='type'>i32</span>) <span class='type'>void</span>;</pre>
+<p>Advances the <a href='#apu' class='ref'>apu</a> by the given number of T-cycles.
+</section>
+<section class='member'>
+<h4 id='apu_write'><span class='heading-body'>fn apu_write</span><span class='heading-extra'><a href='#apu_write'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>fn</span> apu_write(a: <span class='type'>*</span><span class='type'>apu</span>, addr: <span class='type'>u16</span>, value: <span class='type'>u8</span>) <span class='type'>void</span>;</pre>
+<p>Writes to an <a href='#apu' class='ref'>apu</a> register (0xFF10-0xFF3F).
+</section>
+<section class='member'>
+<h4 id='audio_strerror'><span class='heading-body'>fn audio_strerror</span><span class='heading-extra'><a href='#audio_strerror'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>fn</span> audio_strerror(err: <span class='type'>audio_error</span>) <span class='type'>str</span>;</pre>
+<p>Returns a human-readable message for an <a href='#audio_error' class='ref'>audio_error</a>.
+</section>
+<section class='member'>
+<h4 id='cart_free'><span class='heading-body'>fn cart_free</span><span class='heading-extra'><a href='#cart_free'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>fn</span> cart_free(c: <span class='type'>*</span><span class='type'>cartridge</span>) <span class='type'>void</span>;</pre>
+<p>Frees the RAM allocated by <a href='#' class='ref invalid' title='This reference could not be found'>cart_init_ram</a>. Must be called when the <a href='#cartridge' class='ref'>cartridge</a> is no longer needed.
+</section>
+<section class='member'>
+<h4 id='cart_read_ram'><span class='heading-body'>fn cart_read_ram</span><span class='heading-extra'><a href='#cart_read_ram'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>fn</span> cart_read_ram(c: <span class='type'>*</span><span class='type'>cartridge</span>, addr: <span class='type'>u16</span>) <span class='type'>u8</span>;</pre>
+<p>Reads from external RAM.
+</section>
+<section class='member'>
+<h4 id='cart_read_rom'><span class='heading-body'>fn cart_read_rom</span><span class='heading-extra'><a href='#cart_read_rom'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>fn</span> cart_read_rom(c: <span class='type'>*</span><span class='type'>cartridge</span>, addr: <span class='type'>u16</span>) <span class='type'>u8</span>;</pre>
+<p>Reads from ROM with bank switching.
+</section>
+<section class='member'>
+<h4 id='cart_write_control'><span class='heading-body'>fn cart_write_control</span><span class='heading-extra'><a href='#cart_write_control'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>fn</span> cart_write_control(c: <span class='type'>*</span><span class='type'>cartridge</span>, addr: <span class='type'>u16</span>, val: <span class='type'>u8</span>) <span class='type'>void</span>;</pre>
+<p>Handles MBC register writes (0x0000-0x7FFF).
+</section>
+<section class='member'>
+<h4 id='cart_write_ram'><span class='heading-body'>fn cart_write_ram</span><span class='heading-extra'><a href='#cart_write_ram'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>fn</span> cart_write_ram(c: <span class='type'>*</span><span class='type'>cartridge</span>, addr: <span class='type'>u16</span>, val: <span class='type'>u8</span>) <span class='type'>void</span>;</pre>
+<p>Writes to external RAM.
+</section>
+<section class='member'>
+<h4 id='cpu_step'><span class='heading-body'>fn cpu_step</span><span class='heading-extra'><a href='#cpu_step'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>fn</span> cpu_step(c: <span class='type'>*</span><span class='type'>cpu</span>, m: <span class='type'>*</span><span class='type'>mmu</span>) <span class='type'>i32</span>;</pre>
+<p>Execute one instruction. Reads from <a href='#mmu_read' class='ref'>mmu_read</a> and writes via <a href='#mmu_write' class='ref'>mmu_write</a>. Returns T-cycles consumed.
+</section>
+<section class='member'>
+<h4 id='finish'><span class='heading-body'>fn finish</span><span class='heading-extra'><a href='#finish'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>fn</span> finish(gb: <span class='type'>*</span><span class='type'>gameboy</span>) <span class='type'>void</span>;</pre>
+<p>Frees resources owned by the <a href='#gameboy' class='ref'>gameboy</a>.
+</section>
+<section class='member'>
+<h4 id='init'><span class='heading-body'>fn init</span><span class='heading-extra'><a href='#init'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>fn</span> init(gb: <span class='type'>*</span><span class='type'>gameboy</span>) <span class='type'>void</span>;</pre>
+<p>Links the <a href='#mmu' class='ref'>mmu</a> bus to its peripheral components. Must be called once after <a href='#newgameboy' class='ref'>newgameboy</a>, before calling <a href='#run_frame' class='ref'>run_frame</a>.
+</section>
+<section class='member'>
+<h4 id='joypad_read'><span class='heading-body'>fn joypad_read</span><span class='heading-extra'><a href='#joypad_read'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>fn</span> joypad_read(j: <span class='type'>*</span><span class='type'>joypad</span>) <span class='type'>u8</span>;</pre>
+<p>Returns the JOYP register value based on current button state.
+</section>
+<section class='member'>
+<h4 id='joypad_set_key'><span class='heading-body'>fn joypad_set_key</span><span class='heading-extra'><a href='#joypad_set_key'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>fn</span> joypad_set_key(j: <span class='type'>*</span><span class='type'>joypad</span>, key: <span class='type'>joy_key</span>, pressed: <span class='type'>bool</span>) <span class='type'>bool</span>;</pre>
+<p>Updates one joypad key and returns true when this change should request <a href='#' class='ref invalid' title='This reference could not be found'>INT_JOYPAD</a>.
+</section>
+<section class='member'>
+<h4 id='joypad_write'><span class='heading-body'>fn joypad_write</span><span class='heading-extra'><a href='#joypad_write'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>fn</span> joypad_write(j: <span class='type'>*</span><span class='type'>joypad</span>, value: <span class='type'>u8</span>) <span class='type'>bool</span>;</pre>
+<p>Sets the JOYP selection bits from a write to 0xFF00.
+</section>
+<section class='member'>
+<h4 id='mmu_read'><span class='heading-body'>fn mmu_read</span><span class='heading-extra'><a href='#mmu_read'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>fn</span> mmu_read(m: <span class='type'>*</span><span class='type'>mmu</span>, addr: <span class='type'>u16</span>) <span class='type'>u8</span>;</pre>
+<p>Reads a byte from the memory bus. Routes to <a href='#cartridge' class='ref'>cartridge</a>, <a href='#timer' class='ref'>timer</a>, <a href='#joypad' class='ref'>joypad</a>, or <a href='#apu' class='ref'>apu</a> as appropriate for the given address.
+</section>
+<section class='member'>
+<h4 id='mmu_tick_dma'><span class='heading-body'>fn mmu_tick_dma</span><span class='heading-extra'><a href='#mmu_tick_dma'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>fn</span> mmu_tick_dma(m: <span class='type'>*</span><span class='type'>mmu</span>, cycles: <span class='type'>i32</span>) <span class='type'>void</span>;</pre>
+<p>Advances an active OAM DMA transfer by the given number of T-cycles.
+</section>
+<section class='member'>
+<h4 id='mmu_write'><span class='heading-body'>fn mmu_write</span><span class='heading-extra'><a href='#mmu_write'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>fn</span> mmu_write(m: <span class='type'>*</span><span class='type'>mmu</span>, addr: <span class='type'>u16</span>, value: <span class='type'>u8</span>) <span class='type'>void</span>;</pre>
+<p>Writes a byte to the memory bus. Routes to <a href='#cartridge' class='ref'>cartridge</a>, <a href='#timer' class='ref'>timer</a>, <a href='#joypad' class='ref'>joypad</a>, or <a href='#apu' class='ref'>apu</a> as appropriate for the given address.
+</section>
+<section class='member'>
+<h4 id='newapu'><span class='heading-body'>fn newapu</span><span class='heading-extra'><a href='#newapu'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>fn</span> newapu() <span class='type'>apu</span>;</pre>
+<p>Creates an <a href='#apu' class='ref'>apu</a> initialized to DMG post-boot state.
+</section>
+<section class='member'>
+<h4 id='newcart'><span class='heading-body'>fn newcart</span><span class='heading-extra'><a href='#newcart'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>fn</span> newcart(rom: <span class='type'>[</span><span class='type'>]</span><span class='type'>u8</span>) <span class='type'>cartridge</span>;</pre>
+<p>Creates a <a href='#cartridge' class='ref'>cartridge</a> from ROM data. The caller retains ownership of rom.
+</section>
+<section class='member'>
+<h4 id='newgameboy'><span class='heading-body'>fn newgameboy</span><span class='heading-extra'><a href='#newgameboy'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>fn</span> newgameboy(rom: <span class='type'>[</span><span class='type'>]</span><span class='type'>u8</span>) <span class='type'>gameboy</span>;</pre>
+<p>Creates a new <a href='#gameboy' class='ref'>gameboy</a> initialized to DMG post-boot state. The caller must call <a href='#init' class='ref'>init</a> before <a href='#run_frame' class='ref'>run_frame</a>.
+</section>
+<section class='member'>
+<h4 id='newtimer'><span class='heading-body'>fn newtimer</span><span class='heading-extra'><a href='#newtimer'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>fn</span> newtimer() <span class='type'>timer</span>;</pre>
+<p>Creates a <a href='#timer' class='ref'>timer</a> initialized to DMG post-boot state.
+</section>
+<section class='member'>
+<h4 id='ppu_update'><span class='heading-body'>fn ppu_update</span><span class='heading-extra'><a href='#ppu_update'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>fn</span> ppu_update(g: <span class='type'>*</span><span class='type'>ppu</span>, m: <span class='type'>*</span><span class='type'>mmu</span>) <span class='type'>void</span>;</pre>
+<p>Advances the <a href='#ppu' class='ref'>ppu</a> by one T-cycle. Updates STAT, LY, and triggers scanline rendering and <a href='#' class='ref invalid' title='This reference could not be found'>INT_VBLANK</a> / <a href='#' class='ref invalid' title='This reference could not be found'>INT_STAT</a> interrupts as needed.
+</section>
+<section class='member'>
+<h4 id='run_frame'><span class='heading-body'>fn run_frame</span><span class='heading-extra'><a href='#run_frame'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>fn</span> run_frame(gb: <span class='type'>*</span><span class='type'>gameboy</span>) <span class='type'>void</span>;</pre>
+<p>Runs one frame (70224 T-cycles) of emulation. Carries over excess cycles from the previous frame so the PPU stays aligned with presentation and never overwrites the framebuffer with next-frame content.
+</section>
+<section class='member'>
+<h4 id='timer_read'><span class='heading-body'>fn timer_read</span><span class='heading-extra'><a href='#timer_read'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>fn</span> timer_read(t: <span class='type'>*</span><span class='type'>timer</span>, addr: <span class='type'>u16</span>) <span class='type'>u8</span>;</pre>
+<p>Returns the value of a timer register.
+</section>
+<section class='member'>
+<h4 id='timer_update'><span class='heading-body'>fn timer_update</span><span class='heading-extra'><a href='#timer_update'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>fn</span> timer_update(t: <span class='type'>*</span><span class='type'>timer</span>, cycles: <span class='type'>i32</span>) <span class='type'>bool</span>;</pre>
+<p>Advances the <a href='#timer' class='ref'>timer</a> by n T-cycles. Returns true if an <a href='#' class='ref invalid' title='This reference could not be found'>INT_TIMER</a> interrupt should fire.
+</section>
+<section class='member'>
+<h4 id='timer_write'><span class='heading-body'>fn timer_write</span><span class='heading-extra'><a href='#timer_write'>[link]</a>
+	</span></h4>
+<pre class='decl'>
+<span class='keyword'>fn</span> timer_write(t: <span class='type'>*</span><span class='type'>timer</span>, addr: <span class='type'>u16</span>, value: <span class='type'>u8</span>) <span class='type'>void</span>;</pre>
+<p>Sets a timer register value.
+</section>
+<section class='member'>
+<h4 id='main'><span class='heading-body'>fn main</span><span class='heading-extra'><a href='#main'>[link]</a>
+	</span></h4>
+<details>
+<summary>Show undocumented member</summary>
+<pre class='decl'>
+<span class='keyword'>fn</span> main() <span class='type'>void</span>;</pre>
+</details>
+</section>

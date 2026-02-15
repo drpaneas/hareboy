@@ -1,0 +1,80 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      QBE_REF: 4f9b94a9b32a694ba58f99a49d5ceec2656c06ca
+      HAREC_REF: 1e65ac55d1e9e944664e33fc03c642460ab1746d
+      HARE_REF: f2449260531373e7bea52353a15a1bab978ff00a
+      HARE_SDL2_REF: fb6008be0b79a2a24b1ac960316a83f7873b4f39
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libsdl2-dev build-essential scdoc
+
+      - name: Install QBE
+        run: |
+          git clone git://c9x.me/qbe.git
+          cd qbe
+          git checkout "$QBE_REF"
+          make -j$(nproc)
+          sudo make install
+
+      - name: Install harec
+        run: |
+          git clone https://git.sr.ht/~sircmpwn/harec
+          cd harec
+          git checkout "$HAREC_REF"
+          cp configs/linux.mk config.mk
+          make -j$(nproc)
+          sudo make install
+
+      - name: Install Hare
+        run: |
+          git clone https://git.sr.ht/~sircmpwn/hare
+          cd hare
+          git checkout "$HARE_REF"
+          cp configs/linux.mk config.mk
+          make -j$(nproc)
+          sudo make install
+
+      - name: Install hare-sdl2
+        run: |
+          git clone https://git.sr.ht/~sircmpwn/hare-sdl2
+          cd hare-sdl2
+          git checkout "$HARE_SDL2_REF"
+          cd ..
+          sudo mkdir -p /usr/local/src/hare/third-party
+          sudo cp -r hare-sdl2/sdl2 /usr/local/src/hare/third-party/
+
+      - name: Build hareboy
+        run: hare build -lSDL2 -o hareboy .
+
+      - name: Smoke test CLI usage
+        run: |
+          set +e
+          output="$(./hareboy 2>&1)"
+          status=$?
+          set -e
+          if [ "$status" -ne 1 ]; then
+            echo "Expected exit code 1 without ROM, got $status"
+            exit 1
+          fi
+          case "$output" in
+            *"Usage: hareboy <rom.gb>"*) ;;
+            *)
+              echo "Missing usage output"
+              echo "$output"
+              exit 1
+              ;;
+          esac
